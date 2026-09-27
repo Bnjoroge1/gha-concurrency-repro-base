@@ -1,0 +1,21 @@
+name: PR Target Check
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: deploy-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show trust and refs
+        run: |
+          echo "pull_request_target run"
+          echo "ref: $GITHUB_REF"
+          echo "head ref: ${{ github.head_ref }}"
+          echo "base ref: ${{ github.base_ref }}"
+          sleep 60
