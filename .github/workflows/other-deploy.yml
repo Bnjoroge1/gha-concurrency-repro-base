@@ -1,0 +1,17 @@
+name: Other Deploy
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: shared-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "other deployment started"
+          date
+          sleep 120
